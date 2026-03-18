@@ -178,7 +178,7 @@ select {
   border-radius: 10px;
   padding: 12px;
   background: #0b1220;
-  max-height: calc(100vh - 280px);
+  max-height: 280px;
   overflow: auto;
 }
 
@@ -207,6 +207,100 @@ select {
   max-height: 320px;
   overflow: auto;
   font-size: 12px;
+}
+
+.preview-section {
+  margin-top: 12px;
+}
+
+.preview-section h3,
+.editor-section h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.preview-panel {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  background: #0a1325;
+  max-height: 280px;
+  overflow: auto;
+  line-height: 1.68;
+}
+
+.preview-panel h1,
+.preview-panel h2,
+.preview-panel h3,
+.preview-panel h4 {
+  margin: 12px 0 8px;
+}
+
+.preview-panel p {
+  margin: 8px 0;
+}
+
+.preview-panel pre {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 10px;
+  overflow: auto;
+}
+
+.preview-panel blockquote {
+  border-left: 3px solid var(--primary-2);
+  margin: 8px 0;
+  padding: 4px 10px;
+  color: #cbd5e1;
+}
+
+.editor-section {
+  margin-top: 12px;
+}
+
+.editor-textarea {
+  width: 100%;
+  min-height: 240px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0b1220;
+  color: #d1e7ff;
+  padding: 10px;
+  line-height: 1.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+}
+
+.editor-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.editor-buttons button {
+  border: 1px solid var(--line);
+  background: #172033;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.editor-buttons button:hover {
+  border-color: var(--primary-2);
+}
+
+.editor-buttons .primary {
+  border-color: #1d4ed8;
+  background: #1e3a8a;
+}
+
+.editor-buttons .danger {
+  border-color: #be123c;
+  background: #881337;
 }
 
 .muted {
