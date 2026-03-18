@@ -42,6 +42,20 @@ novel/
    http://localhost:8000/viewer/
    ```
 
+## 部署到 GitHub Pages（在线访问）
+
+仓库已提供自动部署工作流：`.github/workflows/deploy-pages.yml`。  
+当 `main` 分支有新提交时，会自动把 `novel/` 目录发布为 Pages 站点。
+
+### 访问地址规则
+
+- **项目仓库页（当前仓库这种）**：
+  - `https://sddacftec.github.io/draft/`
+- **用户主页仓库（仓库名必须是 `sddacftec.github.io`）**：
+  - `https://sddacftec.github.io/`
+
+> 说明：如果你要“无仓库后缀”的根域名直达，需要把站点内容部署在 `sddacftec.github.io` 这个仓库。
+
 ## 浏览器功能
 
 - 分类切换
