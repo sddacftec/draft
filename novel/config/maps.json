@@ -1,0 +1,172 @@
+{
+  "category": "maps",
+  "displayName": "地图与区域",
+  "description": "场景地理、危险等级、资源与剧情连接关系。",
+  "titleKey": "name",
+  "items": [
+    {
+      "id": "map_floating_wood_village",
+      "name": "浮木寨",
+      "zoneType": "海上聚落",
+      "threatLevel": "高",
+      "controlFaction": "巡缉体系 + 黑市势力",
+      "tags": [
+        "新手区",
+        "秩序崩坏",
+        "资源短缺"
+      ],
+      "summary": "由废船与浮桥拼接形成的临时海上聚居地，黑潮来临时迅速失控。",
+      "resources": [
+        "淡水井",
+        "废旧动力件",
+        "基础医疗物资"
+      ],
+      "hazards": [
+        "盐鳞鼠污染",
+        "强征与内斗",
+        "外环防线脆弱"
+      ],
+      "connectedTo": [
+        "九号浮桩",
+        "死人码头"
+      ],
+      "firstAppearance": "chapter-01"
+    },
+    {
+      "id": "map_outer_ring_dock",
+      "name": "外环吊臂平台",
+      "zoneType": "工业残骸点",
+      "threatLevel": "极高（黑潮期）",
+      "controlFaction": "无",
+      "tags": [
+        "救援点",
+        "高风浪",
+        "潮兽接触区"
+      ],
+      "summary": "黑潮夜中大量工人被困区域，救援需要高速切浪与精确操船。",
+      "resources": [
+        "吊装设备",
+        "工业金属件"
+      ],
+      "hazards": [
+        "链桥断裂",
+        "潮兽近岸冲击",
+        "裂翼鳐俯冲"
+      ],
+      "connectedTo": [
+        "浮木寨",
+        "九号浮桩"
+      ],
+      "firstAppearance": "chapter-04"
+    },
+    {
+      "id": "map_no9_pylon",
+      "name": "九号浮桩",
+      "zoneType": "背风避难点",
+      "threatLevel": "中",
+      "controlFaction": "临时由灰雀船团控制",
+      "tags": [
+        "中转站",
+        "修整点",
+        "剧情节点"
+      ],
+      "summary": "废弃钻井平台残骸，具备短时挡浪能力，是黑潮后存活者集结点。",
+      "resources": [
+        "钢架掩体",
+        "临时停泊位"
+      ],
+      "hazards": [
+        "补给不足",
+        "无法长期防守",
+        "次级潮兽游荡"
+      ],
+      "connectedTo": [
+        "浮木寨",
+        "死人码头"
+      ],
+      "firstAppearance": "chapter-04"
+    },
+    {
+      "id": "map_dead_dockyard",
+      "name": "死人码头",
+      "zoneType": "沉船坟地",
+      "threatLevel": "极高",
+      "controlFaction": "多方争夺",
+      "tags": [
+        "副本区",
+        "高收益",
+        "高死亡"
+      ],
+      "summary": "旧时代拆船场沉没后的残骸群，埋藏大量关键模块，也是伏击高发地。",
+      "resources": [
+        "船契组件",
+        "联邦退役装备",
+        "高价值动力件"
+      ],
+      "hazards": [
+        "磁乱区失航",
+        "盐雾遮蔽",
+        "敌对势力埋伏"
+      ],
+      "connectedTo": [
+        "九号浮桩",
+        "雾墓区"
+      ],
+      "firstAppearance": "chapter-05"
+    },
+    {
+      "id": "map_fog_tomb_zone",
+      "name": "雾墓区",
+      "zoneType": "诡秘污染海域",
+      "threatLevel": "灾厄级",
+      "controlFaction": "未知",
+      "tags": [
+        "诡秘探索",
+        "认知污染",
+        "剧情主入口"
+      ],
+      "summary": "长期被盐雾覆盖的禁航区，存在声潮幻听与地形不稳定现象。",
+      "resources": [
+        "导航员线索",
+        "高阶遗物概率",
+        "未知生物样本"
+      ],
+      "hazards": [
+        "声潮污染",
+        "回声峡旋涡塌陷",
+        "巨型潜伏体追踪"
+      ],
+      "connectedTo": [
+        "死人码头",
+        "倒悬灯塔"
+      ],
+      "firstAppearance": "chapter-06"
+    },
+    {
+      "id": "map_upside_down_lighthouse",
+      "name": "倒悬灯塔",
+      "zoneType": "异常遗迹点",
+      "threatLevel": "未知（推定极高）",
+      "controlFaction": "未知",
+      "tags": [
+        "关键线索",
+        "高价值目标",
+        "未知规则"
+      ],
+      "summary": "断裂后倒挂在半空的灯塔遗迹，下方漂浮带有联邦标记的救生舱。",
+      "resources": [
+        "联邦导航员",
+        "旧时代日志可能性"
+      ],
+      "hazards": [
+        "未知监听型生物",
+        "近海巨影活动",
+        "高认知污染概率"
+      ],
+      "connectedTo": [
+        "雾墓区"
+      ],
+      "firstAppearance": "chapter-06"
+    }
+  ]
+}

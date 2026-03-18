@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黑潮纪元 - 世界观配置与章节编辑器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>黑潮纪元 · 配置与章节编辑器</h1>
+        <p>人物 / 剧情 / 地图 / 怪物 / 技能 / 装备 / 势力 / 时间线 / 章节</p>
+      </div>
+      <button id="toggleRawBtn" class="ghost-btn">显示原始 JSON</button>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <h2>分类</h2>
+        <nav id="categoryTabs" class="tabs"></nav>
+      </aside>
+
+      <section class="content">
+        <section class="controls">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="搜索名称、摘要、标签、关系..."
+          />
+          <select id="tagSelect">
+            <option value="">全部标签</option>
+          </select>
+        </section>
+
+        <section class="meta">
+          <h2 id="datasetTitle">加载中...</h2>
+          <p id="datasetDesc"></p>
+          <p id="datasetCount"></p>
+        </section>
+
+        <section id="cardsContainer" class="cards"></section>
+      </section>
+
+      <aside class="detail">
+        <h2 id="detailTitle">详情</h2>
+        <div id="detailPanel" class="detail-panel">
+          <p class="muted">点击左侧卡片查看详情</p>
+        </div>
+        <section id="previewSection" class="preview-section hidden">
+          <h3>章节预览</h3>
+          <div id="previewPanel" class="preview-panel"></div>
+        </section>
+        <section class="editor-section">
+          <h3 id="editorTitle">编辑器</h3>
+          <p id="editorHint" class="muted">
+            你可以在此修改配置条目或章节正文。配置修改仅在浏览器内生效，可导出保存。
+          </p>
+          <textarea
+            id="editorTextarea"
+            class="editor-textarea"
+            spellcheck="false"
+            placeholder="选择左侧条目后开始编辑..."
+          ></textarea>
+          <div id="editorButtons" class="editor-buttons"></div>
+        </section>
+        <pre id="rawPanel" class="raw-panel hidden"></pre>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <p>
+        本地调试：<code>cd novel && python3 -m http.server 8000</code>，然后访问
+        <code>http://localhost:8000/viewer/</code>。部署到 GitHub Pages 后可直接在线访问。
+      </p>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
