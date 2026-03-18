@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>黑潮纪元 - 世界观配置浏览器</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div>
+        <h1>黑潮纪元 · 配置浏览器</h1>
+        <p>人物 / 剧情 / 地图 / 怪物 / 技能 / 装备 / 势力 / 时间线</p>
+      </div>
+      <button id="toggleRawBtn" class="ghost-btn">显示原始 JSON</button>
+    </header>
+
+    <main class="layout">
+      <aside class="sidebar">
+        <h2>分类</h2>
+        <nav id="categoryTabs" class="tabs"></nav>
+      </aside>
+
+      <section class="content">
+        <section class="controls">
+          <input
+            id="searchInput"
+            type="search"
+            placeholder="搜索名称、摘要、标签、关系..."
+          />
+          <select id="tagSelect">
+            <option value="">全部标签</option>
+          </select>
+        </section>
+
+        <section class="meta">
+          <h2 id="datasetTitle">加载中...</h2>
+          <p id="datasetDesc"></p>
+          <p id="datasetCount"></p>
+        </section>
+
+        <section id="cardsContainer" class="cards"></section>
+      </section>
+
+      <aside class="detail">
+        <h2>详情</h2>
+        <div id="detailPanel" class="detail-panel">
+          <p class="muted">点击左侧卡片查看详情</p>
+        </div>
+        <pre id="rawPanel" class="raw-panel hidden"></pre>
+      </aside>
+    </main>
+
+    <footer class="footer">
+      <p>
+        提示：请在 <code>novel/</code> 目录启动 HTTP 服务后访问本页面，避免浏览器对本地
+        JSON 读取限制。
+      </p>
+    </footer>
+
+    <script src="./app.js" defer></script>
+  </body>
+</html>
