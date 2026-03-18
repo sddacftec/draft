@@ -28,7 +28,8 @@ const state = {
   search: "",
   tag: "",
   selectedId: "",
-  showRaw: false
+  showRaw: false,
+  previewModalOpen: false
 };
 
 const els = {
@@ -42,7 +43,11 @@ const els = {
   detailTitle: document.getElementById("detailTitle"),
   detailPanel: document.getElementById("detailPanel"),
   previewSection: document.getElementById("previewSection"),
+  openPreviewModalBtn: document.getElementById("openPreviewModalBtn"),
   previewPanel: document.getElementById("previewPanel"),
+  previewModal: document.getElementById("previewModal"),
+  previewModalContent: document.getElementById("previewModalContent"),
+  closePreviewModalBtn: document.getElementById("closePreviewModalBtn"),
   editorTitle: document.getElementById("editorTitle"),
   editorHint: document.getElementById("editorHint"),
   editorTextarea: document.getElementById("editorTextarea"),
@@ -156,6 +161,30 @@ function bindEvents() {
     renderCards();
     showEditorMessage("章节草稿已自动保存到浏览器。");
   });
+
+  els.openPreviewModalBtn.addEventListener("click", () => {
+    if (state.mode !== "chapters" || !state.selectedId) return;
+    const item = getSelectedItem();
+    if (!item) return;
+    const text = getChapterContent(item.id);
+    openPreviewModal(text);
+  });
+
+  els.closePreviewModalBtn.addEventListener("click", () => {
+    closePreviewModal();
+  });
+
+  els.previewModal.addEventListener("click", (e) => {
+    if (e.target === els.previewModal) {
+      closePreviewModal();
+    }
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && state.previewModalOpen) {
+      closePreviewModal();
+    }
+  });
 }
 
 function renderTabs() {
@@ -186,6 +215,9 @@ function renderTabs() {
 function switchTab(key) {
   state.activeKey = key;
   state.mode = key === CHAPTER_TAB_KEY ? "chapters" : "config";
+  if (state.mode !== "chapters") {
+    closePreviewModal();
+  }
   state.search = "";
   state.tag = "";
   state.selectedId = "";
@@ -365,12 +397,15 @@ function getItemSummary(item) {
 function renderDetail() {
   els.detailPanel.innerHTML = "";
   els.previewSection.classList.toggle("hidden", state.mode !== "chapters");
+  els.openPreviewModalBtn.classList.toggle("hidden", state.mode !== "chapters");
 
   const item = getSelectedItem();
   if (!item) {
     els.detailTitle.textContent = "详情";
     els.detailPanel.innerHTML = '<p class="muted">点击左侧卡片查看详情</p>';
     els.previewPanel.innerHTML = "";
+    els.openPreviewModalBtn.classList.add("hidden");
+    closePreviewModal();
     return;
   }
 
@@ -430,7 +465,9 @@ function renderChapterDetail(item) {
 }
 
 function renderChapterPreview(markdownText) {
-  els.previewPanel.innerHTML = markdownToHtml(markdownText);
+  const html = markdownToHtml(markdownText);
+  els.previewPanel.innerHTML = html;
+  els.previewModalContent.innerHTML = html;
 }
 
 function renderEditor() {
@@ -681,6 +718,19 @@ function renderRawPanel() {
 
   const source = item || currentDataset();
   els.rawPanel.textContent = JSON.stringify(source, null, 2);
+}
+
+function openPreviewModal(markdownText) {
+  renderChapterPreview(markdownText);
+  state.previewModalOpen = true;
+  els.previewModal.classList.remove("hidden");
+  document.body.classList.add("modal-open");
+}
+
+function closePreviewModal() {
+  state.previewModalOpen = false;
+  els.previewModal.classList.add("hidden");
+  document.body.classList.remove("modal-open");
 }
 
 function getSelectedItem() {

@@ -22,6 +22,10 @@ body {
   color: var(--text);
 }
 
+body.modal-open {
+  overflow: hidden;
+}
+
 .topbar {
   display: flex;
   justify-content: space-between;
@@ -219,6 +223,13 @@ select {
   font-size: 15px;
 }
 
+.preview-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
 .preview-panel {
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -253,6 +264,73 @@ select {
   margin: 8px 0;
   padding: 4px 10px;
   color: #cbd5e1;
+}
+
+.preview-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.8);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 14px;
+}
+
+.preview-modal-inner {
+  width: min(1200px, 98vw);
+  height: min(92vh, 980px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #020617;
+  display: flex;
+  flex-direction: column;
+}
+
+.preview-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  background: #0f172a;
+}
+
+.preview-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.preview-modal-content {
+  flex: 1;
+  overflow: auto;
+  padding: 18px 22px;
+  line-height: 1.75;
+}
+
+.preview-modal-content h1,
+.preview-modal-content h2,
+.preview-modal-content h3,
+.preview-modal-content h4 {
+  margin: 14px 0 10px;
+}
+
+.preview-modal-content p {
+  margin: 10px 0;
+}
+
+.preview-modal-content pre {
+  background: #0b1220;
+  border: 1px solid #1e293b;
+  border-radius: 8px;
+  padding: 12px;
+  overflow: auto;
+}
+
+.preview-modal-content blockquote {
+  border-left: 4px solid var(--primary-2);
+  padding: 4px 12px;
+  color: #cbd5e1;
+  margin: 10px 0;
 }
 
 .editor-section {
