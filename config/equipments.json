@@ -1,0 +1,142 @@
+{
+  "category": "equipments",
+  "displayName": "装备与道具",
+  "description": "武器、载具、模块与消耗品配置。",
+  "titleKey": "name",
+  "items": [
+    {
+      "id": "eq_gray_sparrow",
+      "name": "灰雀号",
+      "type": "轻型快艇",
+      "rarity": "剧情核心（可成长）",
+      "owner": "林渊 / 灰雀船团",
+      "tags": [
+        "主载具",
+        "成长装备",
+        "高戏份"
+      ],
+      "summary": "由废弃快艇改造而成，绑定船契后成为主角团队早期生存核心。",
+      "stats": {
+        "mobility": "中上",
+        "durability": "中下",
+        "capacity": "低（可扩展）",
+        "stealth": "中"
+      },
+      "modules": [
+        "船契组件Ⅰ（已融合）",
+        "应急增压管路",
+        "基础拖缆位"
+      ],
+      "upgradePath": [
+        "扩展拖曳位",
+        "加装短冲炮",
+        "舰灵兼容改造（后续）"
+      ],
+      "firstSeen": "chapter-03"
+    },
+    {
+      "id": "eq_blue_chart",
+      "name": "幽蓝航图",
+      "type": "遗物",
+      "rarity": "传说级（未知来源）",
+      "owner": "林渊",
+      "tags": [
+        "核心金手指",
+        "导航",
+        "时间干预"
+      ],
+      "summary": "可显示生还率、推荐航线并触发短回溯，是整条主线的能力中枢。",
+      "stats": {
+        "navigation": "极高",
+        "combatAid": "高",
+        "risk": "极高（盐化代价）"
+      },
+      "modules": [
+        "生还率计算",
+        "任务提示",
+        "短回溯"
+      ],
+      "upgradePath": [
+        "更多航线层级",
+        "复合情报解析",
+        "舰队级联动"
+      ],
+      "firstSeen": "chapter-01"
+    },
+    {
+      "id": "eq_contract_module_i",
+      "name": "标准船契组件Ⅰ型",
+      "type": "载具模块",
+      "rarity": "稀有",
+      "owner": "灰雀号",
+      "tags": [
+        "动力增强",
+        "系统模块",
+        "副本掉落"
+      ],
+      "summary": "从联邦退役巡逻艇锁柜夺得，融合后显著提升灰雀号机动与稳定。",
+      "stats": {
+        "powerBoost": "+18%",
+        "stabilityBoost": "显著提升",
+        "towSlots": "+2"
+      },
+      "modules": [
+        "动力曲线优化",
+        "稳定锚定逻辑"
+      ],
+      "upgradePath": [
+        "组件Ⅱ/Ⅲ拼装",
+        "正式船契成套化"
+      ],
+      "firstSeen": "chapter-05"
+    },
+    {
+      "id": "eq_signal_flare",
+      "name": "信号枪",
+      "type": "辅助武器",
+      "rarity": "常见",
+      "owner": "苏棠（常备）",
+      "tags": [
+        "驱离",
+        "照明",
+        "低成本"
+      ],
+      "summary": "在黑潮夜中用于压制与驱离裂翼鳐等空域单位，也可作为定位信号。",
+      "stats": {
+        "damage": "低",
+        "control": "中",
+        "range": "中"
+      },
+      "modules": [],
+      "upgradePath": [
+        "高亮燃烧弹",
+        "声光干扰弹"
+      ],
+      "firstSeen": "chapter-04"
+    },
+    {
+      "id": "eq_salt_suppression_kit",
+      "name": "抑盐医疗包",
+      "type": "消耗型医疗道具",
+      "rarity": "紧缺物资",
+      "owner": "苏棠 / 灰雀船团",
+      "tags": [
+        "治疗",
+        "稀缺",
+        "生存刚需"
+      ],
+      "summary": "包含抑盐针、止血包、抗惊厥药剂，用于稳定污染与重伤状态。",
+      "stats": {
+        "saltControl": "中",
+        "traumaCare": "中高",
+        "stockPressure": "高"
+      },
+      "modules": [],
+      "upgradePath": [
+        "分级抑盐剂",
+        "移动医疗舱"
+      ],
+      "firstSeen": "chapter-02"
+    }
+  ]
+}

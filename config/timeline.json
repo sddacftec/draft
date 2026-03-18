@@ -1,0 +1,80 @@
+{
+  "category": "timeline",
+  "displayName": "时间线",
+  "description": "按章节推进的重要事件节点。",
+  "titleKey": "title",
+  "items": [
+    {
+      "id": "time_001",
+      "title": "海底绑定幽蓝航图",
+      "chapter": "chapter-01",
+      "dayIndex": "D0",
+      "impact": "主角获得生还率与回溯核心能力",
+      "tags": [
+        "起点事件",
+        "命运转折"
+      ],
+      "summary": "林渊在白鹭号残骸获取遗物，收到黑潮三小时倒计时。"
+    },
+    {
+      "id": "time_002",
+      "title": "浮木寨出现盐鳞鼠",
+      "chapter": "chapter-02",
+      "dayIndex": "D0",
+      "impact": "确认黑潮前兆，聚落秩序开始失控",
+      "tags": [
+        "灾变前兆",
+        "社会崩溃"
+      ],
+      "summary": "淡水井污染触发恐慌，巡缉体系开始强征。"
+    },
+    {
+      "id": "time_003",
+      "title": "夺取灰雀号并首次回溯",
+      "chapter": "chapter-03",
+      "dayIndex": "D0 夜",
+      "impact": "主角完成从个体求生到团队领导的跃迁",
+      "tags": [
+        "首次爆点",
+        "能力代价"
+      ],
+      "summary": "码头夜战后灰雀号点火成功，黑潮压境。"
+    },
+    {
+      "id": "time_004",
+      "title": "黑潮夜撤离与九号浮桩落脚",
+      "chapter": "chapter-04",
+      "dayIndex": "D0 深夜",
+      "impact": "核心团队雏形形成，浮木寨线阶段收束",
+      "tags": [
+        "群像战",
+        "阶段转场"
+      ],
+      "summary": "完成外环救援并脱离主灾区，临时据点建立。"
+    },
+    {
+      "id": "time_005",
+      "title": "夺得船契组件Ⅰ",
+      "chapter": "chapter-05",
+      "dayIndex": "D1",
+      "impact": "灰雀号成长体系开启，推进舰队化可能",
+      "tags": [
+        "副本收益",
+        "装备成长"
+      ],
+      "summary": "死人码头激战后融合船契模块，动力提升。"
+    },
+    {
+      "id": "time_006",
+      "title": "进入雾墓区并发现倒悬灯塔",
+      "chapter": "chapter-06",
+      "dayIndex": "D1",
+      "impact": "主线从生存转向诡秘真相探索",
+      "tags": [
+        "诡秘线开启",
+        "高价值目标出现"
+      ],
+      "summary": "团队经历声潮污染并锁定联邦导航员线索。"
+    }
+  ]
+}
