@@ -13,6 +13,7 @@ const CHAPTER_INDEX_PATH = "../chapters/index.json";
 const CHAPTER_TAB_KEY = "chapters";
 const STORAGE_DATASET_PREFIX = "blacktide-dataset-";
 const STORAGE_CHAPTER_PREFIX = "blacktide-chapter-";
+const STORAGE_VERSION_KEY = "blacktide-content-version";
 const CONTINUITY_CHECKLIST_PATH = "../summaries/continuity-checklist.md";
 
 const state = {
@@ -101,6 +102,15 @@ async function loadChapterData() {
     throw new Error(`读取失败: ${CHAPTER_INDEX_PATH}`);
   }
   const meta = await res.json();
+
+  if (meta.contentVersion) {
+    const storedVersion = storageGet(STORAGE_VERSION_KEY);
+    if (storedVersion !== meta.contentVersion) {
+      clearAllStoredDrafts(meta);
+      storageSet(STORAGE_VERSION_KEY, meta.contentVersion);
+    }
+  }
+
   const items = Array.isArray(meta.items) ? [...meta.items] : [];
   items.sort((a, b) => Number(a.order || 0) - Number(b.order || 0));
 
@@ -1199,6 +1209,20 @@ function storageSet(key, value) {
 function storageRemove(key) {
   try {
     window.localStorage.removeItem(key);
+  } catch {
+    // ignore storage errors
+  }
+}
+
+function clearAllStoredDrafts(meta) {
+  try {
+    const items = Array.isArray(meta.items) ? meta.items : [];
+    items.forEach((item) => {
+      storageRemove(STORAGE_CHAPTER_PREFIX + item.id);
+    });
+    CONFIG_SOURCES.forEach((src) => {
+      storageRemove(STORAGE_DATASET_PREFIX + src.key);
+    });
   } catch {
     // ignore storage errors
   }

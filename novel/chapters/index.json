@@ -2,6 +2,7 @@
   "category": "chapters",
   "displayName": "章节",
   "description": "章节目录与元信息，用于网页阅读与编辑模块。",
+  "contentVersion": "2026-03-20-rewrite-v3",
   "volumes": [
     {
       "id": "vol-01",
