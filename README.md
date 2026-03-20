@@ -6,6 +6,7 @@
 novel/
   chapters/      # 正文章节（每章一个文件）+ index.json
   config/        # 世界观配置文件（JSON）
+  summaries/     # 章节摘要台账与连贯性检查
   viewer/        # 配置可视化浏览与编辑网页
 ```
 
@@ -24,6 +25,20 @@ novel/
 
 - `chapters/index.json`：章节目录（用于网页章节模块）
 - `chapters/chapter-01.md` ... `chapter-06.md`：正文内容
+
+## 连载记忆与连贯性维护
+
+- `summaries/chapter-digest.md`：章节摘要台账（每章必追加）
+- `summaries/continuity-checklist.md`：章节后处理检查清单
+
+推荐流程（每次写完章节后）：
+1. 更新 `chapters/index.json`
+2. 同步 `config/*.json`（人物、关系、地图、怪物、技能、装备、势力、时间线）
+3. 追加 `chapter-digest.md`
+4. 运行 JSON/JS 校验
+
+项目内已提供对应技能：
+- `.cursor/skills/novel-continuity-sync/SKILL.md`
 
 ## 在网页中浏览与编辑
 
