@@ -87,6 +87,36 @@
       </div>
     </div>
 
+    <div id="finalizeModal" class="finalize-modal hidden" role="dialog" aria-modal="true">
+      <div class="finalize-modal-inner">
+        <header class="finalize-modal-header">
+          <h2 id="finalizeModalTitle">章节完稿助手</h2>
+          <button id="closeFinalizeModalBtn" class="ghost-btn" type="button">关闭</button>
+        </header>
+        <div class="finalize-modal-body">
+          <section class="finalize-checklist">
+            <h3>连贯性检查清单</h3>
+            <div id="finalizeChecklistContent" class="finalize-checklist-content"></div>
+          </section>
+          <section class="finalize-summary">
+            <h3>摘要模板</h3>
+            <textarea
+              id="finalizeSummaryTextarea"
+              class="finalize-summary-textarea"
+              spellcheck="false"
+            ></textarea>
+            <div class="finalize-actions">
+              <button id="copyFinalizeSummaryBtn" class="primary" type="button">复制模板</button>
+              <button id="downloadFinalizeSummaryBtn" type="button">下载完稿记录</button>
+            </div>
+            <p class="muted">
+              建议把模板内容追加到 <code>novel/summaries/chapter-digest.md</code>。
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+
     <script src="./app.js" defer></script>
   </body>
 </html>

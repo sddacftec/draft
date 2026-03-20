@@ -346,6 +346,112 @@ select {
   margin: 10px 0;
 }
 
+.finalize-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.84);
+  display: grid;
+  place-items: center;
+  z-index: 60;
+  padding: 14px;
+}
+
+.finalize-modal-inner {
+  width: min(1320px, 98vw);
+  height: min(94vh, 1020px);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: #020617;
+  display: flex;
+  flex-direction: column;
+}
+
+.finalize-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  background: #0f172a;
+}
+
+.finalize-modal-header h2 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.finalize-modal-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.finalize-checklist,
+.finalize-summary {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #0b1220;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.finalize-checklist h3,
+.finalize-summary h3 {
+  margin: 0 0 8px;
+  font-size: 15px;
+}
+
+.finalize-checklist-content {
+  flex: 1;
+  overflow: auto;
+  line-height: 1.68;
+}
+
+.finalize-summary-textarea {
+  flex: 1;
+  min-height: 260px;
+  resize: vertical;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #020617;
+  color: #d1e7ff;
+  padding: 10px;
+  line-height: 1.55;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono",
+    monospace;
+}
+
+.finalize-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.finalize-actions button {
+  border: 1px solid var(--line);
+  background: #172033;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.finalize-actions button:hover {
+  border-color: var(--primary-2);
+}
+
+.finalize-actions .primary {
+  border-color: #1d4ed8;
+  background: #1e3a8a;
+}
+
 .editor-section {
   margin-top: 12px;
 }
@@ -443,6 +549,10 @@ code {
   }
 
   .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .finalize-modal-body {
     grid-template-columns: 1fr;
   }
 }
