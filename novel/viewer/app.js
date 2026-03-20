@@ -43,7 +43,6 @@ const els = {
   detailTitle: document.getElementById("detailTitle"),
   detailPanel: document.getElementById("detailPanel"),
   previewSection: document.getElementById("previewSection"),
-  openPreviewModalBtn: document.getElementById("openPreviewModalBtn"),
   previewPanel: document.getElementById("previewPanel"),
   previewModal: document.getElementById("previewModal"),
   previewModalContent: document.getElementById("previewModalContent"),
@@ -160,14 +159,6 @@ function bindEvents() {
     renderRawPanel();
     renderCards();
     showEditorMessage("章节草稿已自动保存到浏览器。");
-  });
-
-  els.openPreviewModalBtn.addEventListener("click", () => {
-    if (state.mode !== "chapters" || !state.selectedId) return;
-    const item = getSelectedItem();
-    if (!item) return;
-    const text = getChapterContent(item.id);
-    openPreviewModal(text);
   });
 
   els.closePreviewModalBtn.addEventListener("click", () => {
@@ -366,6 +357,29 @@ function renderCards() {
     card.appendChild(title);
     card.appendChild(summary);
     card.appendChild(chips);
+
+    if (state.mode === "chapters") {
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
+
+      const fullscreenBtn = document.createElement("button");
+      fullscreenBtn.type = "button";
+      fullscreenBtn.className = "card-action-btn";
+      fullscreenBtn.textContent = "全屏阅读";
+      fullscreenBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        state.selectedId = item.id;
+        renderCards();
+        renderDetail();
+        renderEditor();
+        renderRawPanel();
+        openPreviewModal(getChapterContent(item.id));
+      });
+
+      actions.appendChild(fullscreenBtn);
+      card.appendChild(actions);
+    }
+
     els.cardsContainer.appendChild(card);
   });
 }
@@ -397,14 +411,12 @@ function getItemSummary(item) {
 function renderDetail() {
   els.detailPanel.innerHTML = "";
   els.previewSection.classList.toggle("hidden", state.mode !== "chapters");
-  els.openPreviewModalBtn.classList.toggle("hidden", state.mode !== "chapters");
 
   const item = getSelectedItem();
   if (!item) {
     els.detailTitle.textContent = "详情";
     els.detailPanel.innerHTML = '<p class="muted">点击左侧卡片查看详情</p>';
     els.previewPanel.innerHTML = "";
-    els.openPreviewModalBtn.classList.add("hidden");
     closePreviewModal();
     return;
   }
