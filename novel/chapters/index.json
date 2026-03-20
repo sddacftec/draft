@@ -8,22 +8,57 @@
       "id": "vol-01",
       "order": 1,
       "title": "卷一 漂来的人",
-      "chapterRange": "chapter-01 ~ chapter-10",
-      "summary": "失忆者林渊随灰雀号漂至浮木寨，从无名漂客到深潜觉醒、遗物绑定、夺船突围，在黑潮中完成从孤身求生到领导船团的跃迁。"
+      "chapterRange": "chapter-01 ~ chapter-30",
+      "summary": "失忆者林渊随灰雀号漂至浮木寨，从无名漂客到深潜觉醒、遗物绑定、夺船突围，在黑潮中建立灰雀船团。"
     },
     {
       "id": "vol-02",
       "order": 2,
-      "title": "卷二 黑帆猎场",
-      "chapterRange": "chapter-11 ~ chapter-20",
-      "summary": "围绕资源航线、黑帆势力与审判舰队展开中尺度海战，队伍体系与阵营对抗全面升级。"
+      "title": "卷二 雾墓深处",
+      "chapterRange": "chapter-31 ~ chapter-60",
+      "summary": "进入雾墓海域，遭遇声潮污染与认知型怪物，救出导航员宁白鸢，发现航图是'钥匙'而非导航器。"
     },
     {
       "id": "vol-03",
       "order": 3,
-      "title": "卷三 雾墓遗城",
-      "chapterRange": "chapter-21 ~ chapter-30",
-      "summary": "遗城探索与真相线推进并行，认知污染机制深化，主角接近海天改造计划核心档案。"
+      "title": "卷三 黑帆猎场",
+      "chapterRange": "chapter-61 ~ chapter-90",
+      "summary": "审判舰队追缉、黑帆港博弈、教团登场。多势力角力中林渊盐化危机达到高峰，发现'林仲海'之名。"
+    },
+    {
+      "id": "vol-04",
+      "order": 4,
+      "title": "卷四 沉城遗梦",
+      "chapterRange": "chapter-91 ~ chapter-120",
+      "summary": "深入雾墓遗城，身世第一层揭开：林仲海与海天改造计划。舰灵首次开口。"
+    },
+    {
+      "id": "vol-05",
+      "order": 5,
+      "title": "卷五 铁灰之海",
+      "chapterRange": "chapter-121 ~ chapter-150",
+      "summary": "潜入联邦控制区，揭露联邦利用黑潮维持权力的真相。舰灵完整觉醒，记得回家的路。"
+    },
+    {
+      "id": "vol-06",
+      "order": 6,
+      "title": "卷六 裂潮纪",
+      "chapterRange": "chapter-151 ~ chapter-180",
+      "summary": "超级黑潮席卷全域，旧秩序瓦解。林渊率联合舰队穿越黑潮，成为新时代领袖。"
+    },
+    {
+      "id": "vol-07",
+      "order": 7,
+      "title": "卷七 海天之门",
+      "chapterRange": "chapter-181 ~ chapter-210",
+      "summary": "穿越裂潮带远征海天之门，终极真相揭晓：盐源是海洋的免疫系统，林渊是人海之间的桥梁。"
+    },
+    {
+      "id": "vol-08",
+      "order": 8,
+      "title": "卷八 新纪元",
+      "chapterRange": "chapter-211 ~ chapter-240",
+      "summary": "林渊与盐源完成对话，黑潮终结。从'记住方向'到'方向是自己的'，新世界诞生。"
     }
   ],
   "items": [
