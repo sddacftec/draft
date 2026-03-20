@@ -32,6 +32,7 @@ novel/
 - `summaries/chapter-digest.md`：章节摘要台账（每章必追加）
 - `summaries/continuity-checklist.md`：章节后处理检查清单
 - `summaries/volume-outline.md`：分卷总纲（阶段目标与进度）
+- `summaries/early-arc-outline-v2.md`：前四章重构大纲（用于开篇优化参考）
 
 推荐流程（每次写完章节后）：
 1. 更新 `chapters/index.json`
