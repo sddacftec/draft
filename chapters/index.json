@@ -2,12 +2,38 @@
   "category": "chapters",
   "displayName": "章节",
   "description": "章节目录与元信息，用于网页阅读与编辑模块。",
+  "volumes": [
+    {
+      "id": "vol-01",
+      "order": 1,
+      "title": "卷一 沉海之日",
+      "chapterRange": "chapter-01 ~ chapter-10",
+      "summary": "黑潮降临、夺船求生、雾墓初探与补给争夺，主角团队完成从个体求生到船团雏形的跃迁。"
+    },
+    {
+      "id": "vol-02",
+      "order": 2,
+      "title": "卷二 黑帆猎场",
+      "chapterRange": "chapter-11 ~ chapter-20",
+      "summary": "围绕资源航线、黑帆势力与审判舰队展开中尺度海战，队伍体系与阵营对抗全面升级。"
+    },
+    {
+      "id": "vol-03",
+      "order": 3,
+      "title": "卷三 雾墓遗城",
+      "chapterRange": "chapter-21 ~ chapter-30",
+      "summary": "遗城探索与真相线推进并行，认知污染机制深化，主角接近海天改造计划核心档案。"
+    }
+  ],
   "items": [
     {
       "id": "chapter-01",
       "title": "第1章 潮线之下（扩写版）",
       "file": "chapter-01.md",
       "order": 1,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 1,
       "tags": [
         "开篇",
         "遗物觉醒",
@@ -20,6 +46,9 @@
       "title": "第2章 会发光的航图（扩写版）",
       "file": "chapter-02.md",
       "order": 2,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 2,
       "tags": [
         "聚落冲突",
         "先兆怪",
@@ -32,6 +61,9 @@
       "title": "第3章 灰雀号（扩写版）",
       "file": "chapter-03.md",
       "order": 3,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 3,
       "tags": [
         "夜战",
         "首次回溯",
@@ -44,6 +76,9 @@
       "title": "第4章 黑潮夜",
       "file": "chapter-04.md",
       "order": 4,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 4,
       "tags": [
         "群像撤离",
         "潮兽冲击",
@@ -56,6 +91,9 @@
       "title": "第5章 第一份船契",
       "file": "chapter-05.md",
       "order": 5,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 5,
       "tags": [
         "副本突入",
         "船契升级",
@@ -68,6 +106,9 @@
       "title": "第6章 雾墓区",
       "file": "chapter-06.md",
       "order": 6,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 6,
       "tags": [
         "诡秘污染",
         "回声规则",
@@ -80,6 +121,9 @@
       "title": "第7章 灯塔里的人",
       "file": "chapter-07.md",
       "order": 7,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 7,
       "tags": [
         "关键角色登场",
         "无声航线",
@@ -92,6 +136,9 @@
       "title": "第8章 盐化值",
       "file": "chapter-08.md",
       "order": 8,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 8,
       "tags": [
         "风险升级",
         "海藻墙",
@@ -104,6 +151,9 @@
       "title": "第9章 海藻墙之后",
       "file": "chapter-09.md",
       "order": 9,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 沉海之日",
+      "inVolumeOrder": 9,
       "tags": [
         "补给争夺",
         "舰灵碎片",

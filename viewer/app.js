@@ -417,6 +417,9 @@ function renderCards() {
     chips.className = "chips";
     const tags = extractTags(item);
     if (state.mode === "chapters") {
+      if (item.volumeTitle) {
+        tags.unshift(item.volumeTitle);
+      }
       tags.unshift(`字数${countCharacters(getChapterContent(item.id))}`);
     }
     tags.slice(0, 4).forEach((tag) => {
@@ -541,6 +544,8 @@ function renderChapterDetail(item) {
 
   const rows = [
     { key: "标题", value: item.title },
+    { key: "所属卷", value: item.volumeTitle || "未分卷" },
+    { key: "卷内序号", value: item.inVolumeOrder ?? "-" },
     { key: "文件", value: item.file },
     { key: "章节序号", value: item.order },
     { key: "字数", value: countCharacters(text) },
@@ -885,6 +890,8 @@ function extractTags(item) {
     "state",
     "chapter",
     "chapterRange",
+    "volumeId",
+    "volumeTitle",
     "threatLevel",
     "status",
     "zoneType",
@@ -982,6 +989,9 @@ function humanizeKey(key) {
     milestones: "成长里程碑",
     firstAppearance: "首次登场",
     chapterRange: "章节范围",
+    volumeId: "卷ID",
+    volumeTitle: "所属卷",
+    inVolumeOrder: "卷内序号",
     objective: "目标",
     conflicts: "冲突",
     keyEvents: "关键事件",
@@ -1113,9 +1123,11 @@ function extractExcerpt(text) {
 function buildDigestTemplate(item) {
   const chapterId = item.id || "chapter-XX";
   const title = item.title || "未命名章节";
+  const volume = item.volumeTitle || "未分卷";
   const summary = item.summary || extractExcerpt(getChapterContent(item.id));
   return [
     `### ${chapterId}`,
+    `- 所属卷：${volume}`,
     `- 本章标题：${title}`,
     `- 本章摘要：${summary}`,
     "- 关键增量（角色/设定/资源）：",
