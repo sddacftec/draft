@@ -33,7 +33,9 @@ const state = {
   showRaw: false,
   previewModalOpen: false,
   finalizeModalOpen: false,
-  continuityChecklistMd: ""
+  continuityChecklistMd: "",
+  previewScrollPositions: new Map(),
+  lastPreviewChapterId: ""
 };
 
 const els = {
@@ -841,17 +843,30 @@ function renderRawPanel() {
 function openPreviewModal(markdownText) {
   closeFinalizeModal();
   renderChapterPreview(markdownText);
-  // Always start full-screen reading from the chapter beginning.
-  els.previewModalContent.scrollTop = 0;
-  if (typeof els.previewModalContent.scrollTo === "function") {
-    els.previewModalContent.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }
+
+  const chapterId = state.selectedId;
+  const isSameChapter = chapterId === state.lastPreviewChapterId;
+  state.lastPreviewChapterId = chapterId;
+
   state.previewModalOpen = true;
   els.previewModal.classList.remove("hidden");
   document.body.classList.add("modal-open");
+
+  if (isSameChapter) {
+    const saved = state.previewScrollPositions.get(chapterId) || 0;
+    els.previewModalContent.scrollTop = saved;
+  } else {
+    els.previewModalContent.scrollTop = 0;
+  }
 }
 
 function closePreviewModal() {
+  if (state.previewModalOpen && state.lastPreviewChapterId) {
+    state.previewScrollPositions.set(
+      state.lastPreviewChapterId,
+      els.previewModalContent.scrollTop
+    );
+  }
   state.previewModalOpen = false;
   els.previewModal.classList.add("hidden");
   if (!state.finalizeModalOpen) {
