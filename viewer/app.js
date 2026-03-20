@@ -13,6 +13,7 @@ const CHAPTER_INDEX_PATH = "../chapters/index.json";
 const CHAPTER_TAB_KEY = "chapters";
 const STORAGE_DATASET_PREFIX = "blacktide-dataset-";
 const STORAGE_CHAPTER_PREFIX = "blacktide-chapter-";
+const CONTINUITY_CHECKLIST_PATH = "../summaries/continuity-checklist.md";
 
 const state = {
   datasets: new Map(),
@@ -29,7 +30,9 @@ const state = {
   tag: "",
   selectedId: "",
   showRaw: false,
-  previewModalOpen: false
+  previewModalOpen: false,
+  finalizeModalOpen: false,
+  continuityChecklistMd: ""
 };
 
 const els = {
@@ -47,6 +50,13 @@ const els = {
   previewModal: document.getElementById("previewModal"),
   previewModalContent: document.getElementById("previewModalContent"),
   closePreviewModalBtn: document.getElementById("closePreviewModalBtn"),
+  finalizeModal: document.getElementById("finalizeModal"),
+  finalizeModalTitle: document.getElementById("finalizeModalTitle"),
+  closeFinalizeModalBtn: document.getElementById("closeFinalizeModalBtn"),
+  finalizeChecklistContent: document.getElementById("finalizeChecklistContent"),
+  finalizeSummaryTextarea: document.getElementById("finalizeSummaryTextarea"),
+  copyFinalizeSummaryBtn: document.getElementById("copyFinalizeSummaryBtn"),
+  downloadFinalizeSummaryBtn: document.getElementById("downloadFinalizeSummaryBtn"),
   editorTitle: document.getElementById("editorTitle"),
   editorHint: document.getElementById("editorHint"),
   editorTextarea: document.getElementById("editorTextarea"),
@@ -64,6 +74,7 @@ init().catch((err) => {
 async function init() {
   await loadConfigDatasets();
   await loadChapterData();
+  await loadContinuityChecklist();
   renderTabs();
   bindEvents();
   switchTab(state.activeKey);
@@ -123,6 +134,24 @@ async function loadChapterData() {
   state.chapters.items = items;
 }
 
+async function loadContinuityChecklist() {
+  try {
+    const res = await fetch(CONTINUITY_CHECKLIST_PATH, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error("read failed");
+    }
+    state.continuityChecklistMd = await res.text();
+  } catch {
+    state.continuityChecklistMd = [
+      "# 连贯性检查清单",
+      "- [ ] 人物关系变化已同步配置",
+      "- [ ] 新地图/规则已同步配置",
+      "- [ ] 时间线与主线推进已同步",
+      "- [ ] 已追加章节摘要台账"
+    ].join("\n");
+  }
+}
+
 function bindEvents() {
   els.searchInput.addEventListener("input", (e) => {
     state.search = e.target.value.trim().toLowerCase();
@@ -165,14 +194,56 @@ function bindEvents() {
     closePreviewModal();
   });
 
+  els.closeFinalizeModalBtn.addEventListener("click", () => {
+    closeFinalizeModal();
+  });
+
   els.previewModal.addEventListener("click", (e) => {
     if (e.target === els.previewModal) {
       closePreviewModal();
     }
   });
 
+  els.finalizeModal.addEventListener("click", (e) => {
+    if (e.target === els.finalizeModal) {
+      closeFinalizeModal();
+    }
+  });
+
+  els.copyFinalizeSummaryBtn.addEventListener("click", async () => {
+    const text = els.finalizeSummaryTextarea.value || "";
+    if (!text.trim()) return;
+    try {
+      await navigator.clipboard.writeText(text);
+      showEditorMessage("摘要模板已复制到剪贴板。");
+    } catch {
+      showEditorMessage("复制失败，请手动全选复制。", true);
+    }
+  });
+
+  els.downloadFinalizeSummaryBtn.addEventListener("click", () => {
+    const item = getSelectedItem();
+    if (!item) return;
+    const content = [
+      `## ${item.id} 完稿记录`,
+      "",
+      "### 连贯性检查清单",
+      state.continuityChecklistMd.trim(),
+      "",
+      "### 摘要草稿",
+      els.finalizeSummaryTextarea.value.trim()
+    ].join("\n");
+    downloadText(`${item.id}-finalize.md`, `${content}\n`, "text/markdown;charset=utf-8");
+    showEditorMessage("已下载本章完稿记录。");
+  });
+
   document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && state.previewModalOpen) {
+    if (e.key !== "Escape") return;
+    if (state.finalizeModalOpen) {
+      closeFinalizeModal();
+      return;
+    }
+    if (state.previewModalOpen) {
       closePreviewModal();
     }
   });
@@ -208,6 +279,7 @@ function switchTab(key) {
   state.mode = key === CHAPTER_TAB_KEY ? "chapters" : "config";
   if (state.mode !== "chapters") {
     closePreviewModal();
+    closeFinalizeModal();
   }
   state.search = "";
   state.tag = "";
@@ -377,6 +449,22 @@ function renderCards() {
       });
 
       actions.appendChild(fullscreenBtn);
+
+      const finalizeBtn = document.createElement("button");
+      finalizeBtn.type = "button";
+      finalizeBtn.className = "card-action-btn";
+      finalizeBtn.textContent = "章节完稿";
+      finalizeBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        state.selectedId = item.id;
+        renderCards();
+        renderDetail();
+        renderEditor();
+        renderRawPanel();
+        openFinalizeModal(item);
+      });
+
+      actions.appendChild(finalizeBtn);
       card.appendChild(actions);
     }
 
@@ -537,6 +625,9 @@ function renderChapterEditor(item) {
 
   els.editorButtons.appendChild(
     makeButton("下载当前章节 .md", "primary", () => downloadCurrentChapter(item))
+  );
+  els.editorButtons.appendChild(
+    makeButton("章节完稿助手", "", () => openFinalizeModal(item))
   );
   els.editorButtons.appendChild(
     makeButton("恢复本章原文", "danger", () => resetChapterToOriginal(item.id))
@@ -733,6 +824,7 @@ function renderRawPanel() {
 }
 
 function openPreviewModal(markdownText) {
+  closeFinalizeModal();
   renderChapterPreview(markdownText);
   state.previewModalOpen = true;
   els.previewModal.classList.remove("hidden");
@@ -742,7 +834,28 @@ function openPreviewModal(markdownText) {
 function closePreviewModal() {
   state.previewModalOpen = false;
   els.previewModal.classList.add("hidden");
-  document.body.classList.remove("modal-open");
+  if (!state.finalizeModalOpen) {
+    document.body.classList.remove("modal-open");
+  }
+}
+
+function openFinalizeModal(item) {
+  if (!item) return;
+  closePreviewModal();
+  state.finalizeModalOpen = true;
+  els.finalizeModalTitle.textContent = `章节完稿助手 · ${item.title}`;
+  els.finalizeChecklistContent.innerHTML = markdownToHtml(state.continuityChecklistMd || "");
+  els.finalizeSummaryTextarea.value = buildDigestTemplate(item);
+  els.finalizeModal.classList.remove("hidden");
+  document.body.classList.add("modal-open");
+}
+
+function closeFinalizeModal() {
+  state.finalizeModalOpen = false;
+  els.finalizeModal.classList.add("hidden");
+  if (!state.previewModalOpen) {
+    document.body.classList.remove("modal-open");
+  }
 }
 
 function getSelectedItem() {
@@ -990,6 +1103,20 @@ function extractExcerpt(text) {
   const oneLine = first.replace(/\s+/g, " ").trim();
   if (!oneLine) return "暂无摘要";
   return oneLine.length > 68 ? `${oneLine.slice(0, 68)}...` : oneLine;
+}
+
+function buildDigestTemplate(item) {
+  const chapterId = item.id || "chapter-XX";
+  const title = item.title || "未命名章节";
+  const summary = item.summary || extractExcerpt(getChapterContent(item.id));
+  return [
+    `### ${chapterId}`,
+    `- 本章标题：${title}`,
+    `- 本章摘要：${summary}`,
+    "- 关键增量（角色/设定/资源）：",
+    "- 连贯性风险（如有）：",
+    "- 下一章入口："
+  ].join("\n");
 }
 
 function countCharacters(text) {
