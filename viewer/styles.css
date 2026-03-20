@@ -177,6 +177,26 @@ select {
   background: #0b1220;
 }
 
+.card-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.card-action-btn {
+  border: 1px solid var(--line);
+  background: #172033;
+  color: var(--text);
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.card-action-btn:hover {
+  border-color: var(--primary-2);
+}
+
 .detail-panel {
   border: 1px solid var(--line);
   border-radius: 10px;
@@ -221,13 +241,6 @@ select {
 .editor-section h3 {
   margin: 0 0 8px;
   font-size: 15px;
-}
-
-.preview-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
 }
 
 .preview-panel {
