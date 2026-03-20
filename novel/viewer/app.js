@@ -826,6 +826,11 @@ function renderRawPanel() {
 function openPreviewModal(markdownText) {
   closeFinalizeModal();
   renderChapterPreview(markdownText);
+  // Always start full-screen reading from the chapter beginning.
+  els.previewModalContent.scrollTop = 0;
+  if (typeof els.previewModalContent.scrollTo === "function") {
+    els.previewModalContent.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }
   state.previewModalOpen = true;
   els.previewModal.classList.remove("hidden");
   document.body.classList.add("modal-open");
