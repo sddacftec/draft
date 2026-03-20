@@ -25,11 +25,13 @@ novel/
 
 - `chapters/index.json`：章节目录（用于网页章节模块）
 - `chapters/chapter-01.md` ... `chapter-06.md`：正文内容
+- `chapters/index.json` 内含 `volumes` 字段与每章 `volumeId`，用于分卷管理
 
 ## 连载记忆与连贯性维护
 
 - `summaries/chapter-digest.md`：章节摘要台账（每章必追加）
 - `summaries/continuity-checklist.md`：章节后处理检查清单
+- `summaries/volume-outline.md`：分卷总纲（阶段目标与进度）
 
 推荐流程（每次写完章节后）：
 1. 更新 `chapters/index.json`
