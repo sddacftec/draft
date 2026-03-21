@@ -160,6 +160,237 @@
       "inVolumeOrder": 9,
       "tags": ["群像撤离", "潮兽冲击", "九号浮桩"],
       "summary": "林渊驾船在码头接人，带26人穿越黑潮三层灾害冲进九号浮桩。引擎半毁，临时船契倒计时。浮木寨火光冲天。"
+    },
+    {
+      "id": "chapter-10",
+      "title": "第10章 天亮以后",
+      "file": "chapter-10.md",
+      "order": 10,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 10,
+      "tags": ["黑潮余波", "船契倒计时", "出发"],
+      "summary": "黑潮后九号浮桩25人困境。临时船契不足两小时，三人出发前往死人码头寻找船契组件和零件。"
+    },
+    {
+      "id": "chapter-11",
+      "title": "第11章 退潮的海",
+      "file": "chapter-11.md",
+      "order": 11,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 11,
+      "tags": ["回溯代价", "浮木寨残骸", "磁乱区"],
+      "summary": "穿越浮木寨残骸带。苏棠追问回溯代价并设定底线。进入死人码头磁乱区和盐雾。"
+    },
+    {
+      "id": "chapter-12",
+      "title": "第12章 死人的码头",
+      "file": "chapter-12.md",
+      "order": 12,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 12,
+      "tags": ["联邦巡逻艇", "船契组件", "GQ-01线索"],
+      "summary": "探索联邦退役巡逻艇，找到船契Ⅰ型组件和P-17手册——记载了GQ-01灰雀旗舰击溃编队的历史。剖眼队标记出现。"
+    },
+    {
+      "id": "chapter-13",
+      "title": "第13章 困兽",
+      "file": "chapter-13.md",
+      "order": 13,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 13,
+      "tags": ["剖眼队", "极限侧倾", "船契融合"],
+      "summary": "遭剖眼队包围。极限侧倾穿过0.8米间隙逃脱。船契Ⅰ型融合成功，临时船契升级为正式船契。"
+    },
+    {
+      "id": "chapter-14",
+      "title": "第14章 回家的路",
+      "file": "chapter-14.md",
+      "order": 14,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 14,
+      "tags": ["灰雀船队", "身世讨论", "归程"],
+      "summary": "回程途中讨论GQ-01手册与灰雀旗舰身份。航图首次自发显示'灰雀船队'字样。"
+    },
+    {
+      "id": "chapter-15",
+      "title": "第15章 活人的事",
+      "file": "chapter-15.md",
+      "order": 15,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 15,
+      "tags": ["手术", "领导权", "投票制"],
+      "summary": "苏棠完成胸腔引流手术。马义质疑林渊领导权，林渊提出投票制，老霍一锤定音。林渊在驾驶台刻下'前进'。"
+    },
+    {
+      "id": "chapter-16",
+      "title": "第16章 清点",
+      "file": "chapter-16.md",
+      "order": 16,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 16,
+      "tags": ["人员清点", "蒸馏水", "来船"],
+      "summary": "老霍整理人员清单。蒸馏装置修复。吕锦开始物资台账。傍晚发现三条挂求救旗的来船。"
+    },
+    {
+      "id": "chapter-17",
+      "title": "第17章 巡缉副队",
+      "file": "chapter-17.md",
+      "order": 17,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 17,
+      "tags": ["罗峻", "巡缉队", "缴械"],
+      "summary": "罗峻带37名幸存者（含11个孩子）到达。交出武器换取靠泊。平台人口增至62人。"
+    },
+    {
+      "id": "chapter-18",
+      "title": "第18章 两条船",
+      "file": "chapter-18.md",
+      "order": 18,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 18,
+      "tags": ["修船", "投票南下", "两条船"],
+      "summary": "修复罗峻巡逻艇。吕锦建立公示制度。投票决定南下寻找新据点。灰雀号+巡逻艇=两条船的船队起点。"
+    },
+    {
+      "id": "chapter-19",
+      "title": "第19章 南下",
+      "file": "chapter-19.md",
+      "order": 19,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 19,
+      "tags": ["南下航行", "中塔冲突", "新据点"],
+      "summary": "两船62人南下航行。途中中塔出身者与外环人冲突。到达南方平台群（第九采掘站）——四座互联平台。"
+    },
+    {
+      "id": "chapter-20",
+      "title": "第20章 生根",
+      "file": "chapter-20.md",
+      "order": 20,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 20,
+      "tags": ["据点建设", "人物过去", "记忆检索"],
+      "summary": "据点建设——电力、淡化水、渔猎、种菜。苏棠和顾北分别袒露过去。深度记忆检索启动。"
+    },
+    {
+      "id": "chapter-21",
+      "title": "第21章 碎镜",
+      "file": "chapter-21.md",
+      "order": 21,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 21,
+      "tags": ["记忆闪回", "林仲海", "身世"],
+      "summary": "深度记忆大闪回：林仲海是联邦研究员、发现盐源、灰雀船队叛逃与内乱、舰灵诞生——林仲海将意识灌注入灰雀号。"
+    },
+    {
+      "id": "chapter-22",
+      "title": "第22章 频率",
+      "file": "chapter-22.md",
+      "order": 22,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 22,
+      "tags": ["SOS信号", "救援", "联邦物资"],
+      "summary": "罗峻截获SOS信号。灰雀号出航救援，发现翻船和联邦物资箱（含抑盐针和抗生素）。救起昏迷女子。"
+    },
+    {
+      "id": "chapter-23",
+      "title": "第23章 沈艾",
+      "file": "chapter-23.md",
+      "order": 23,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 23,
+      "tags": ["联邦测绘员", "信号源", "盐源共鸣"],
+      "summary": "沈艾——联邦北航局测绘员——加入船团。透露七个异常信号源和南方40海里的超强信号。揭示蓝纹是'盐源共鸣痕迹'。"
+    },
+    {
+      "id": "chapter-24",
+      "title": "第24章 不速之客",
+      "file": "chapter-24.md",
+      "order": 24,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 24,
+      "tags": ["剖眼队夜袭", "暗礁突围", "诱敌"],
+      "summary": "剖眼队四船夜袭平台群。灰雀号从北侧暗礁带突围引开敌人，等待敌方搜索无果撤退后返回。"
+    },
+    {
+      "id": "chapter-25",
+      "title": "第25章 老账",
+      "file": "chapter-25.md",
+      "order": 25,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 25,
+      "tags": ["邱彪来犯", "第二次回溯", "船撞船"],
+      "summary": "邱彪投靠剖眼队来犯。第二次回溯（盐化值19→31）。灰雀号撞击快艇反杀。缴获一条快艇。"
+    },
+    {
+      "id": "chapter-26",
+      "title": "第26章 我们的名字",
+      "file": "chapter-26.md",
+      "order": 26,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 26,
+      "tags": ["灰雀船团", "命名", "认同"],
+      "summary": "灰雀船团正式命名。三条船成队。铁皮灰雀旗帜挂上主平台。组织认同开始建立。"
+    },
+    {
+      "id": "chapter-27",
+      "title": "第27章 舰灵",
+      "file": "chapter-27.md",
+      "order": 27,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 27,
+      "tags": ["舰灵通讯", "林仲海", "回"],
+      "summary": "凌晨灰雀号舰灵自发激活。林渊与林仲海意识残片首次通讯——辨认、疲惫、释然。刻下'回'字作为承诺。"
+    },
+    {
+      "id": "chapter-28",
+      "title": "第28章 盘账",
+      "file": "chapter-28.md",
+      "order": 28,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 28,
+      "tags": ["物资盘点", "柴油瓶颈", "补给计划"],
+      "summary": "吕锦全面报告。柴油64天瓶颈。三个补给选项——决定前往联邦7号补给点。出发前夜苏棠星空对话。"
+    },
+    {
+      "id": "chapter-29",
+      "title": "第29章 补给点",
+      "file": "chapter-29.md",
+      "order": 29,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 29,
+      "tags": ["联邦补给点", "物资获取", "航线构想"],
+      "summary": "到达7号补给点——完整物资（柴油160升/抑盐针8支/军粮/弹药）。沈艾提出12个补给点航线网络。"
+    },
+    {
+      "id": "chapter-30",
+      "title": "第30章 方向",
+      "file": "chapter-30.md",
+      "order": 30,
+      "volumeId": "vol-01",
+      "volumeTitle": "卷一 漂来的人",
+      "inVolumeOrder": 30,
+      "tags": ["航线计划", "卷一终章", "新起点"],
+      "summary": "提出近海补给航线计划，全票通过。灰雀船团从求生走向发展。卷一终：记住方向·前进·回。"
     }
   ]
 }
