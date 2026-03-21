@@ -68,6 +68,8 @@ const els = {
   toggleRawBtn: document.getElementById("toggleRawBtn")
 };
 
+initTheme();
+
 init().catch((err) => {
   els.datasetTitle.textContent = "加载失败";
   els.datasetDesc.textContent = String(err);
@@ -1241,6 +1243,26 @@ function clearAllStoredDrafts(meta) {
   } catch {
     // ignore storage errors
   }
+}
+
+function initTheme() {
+  const saved = storageGet("blacktide-theme") || "dark";
+  applyTheme(saved);
+
+  document.getElementById("themeSwitcher").addEventListener("click", (e) => {
+    const btn = e.target.closest("[data-theme]");
+    if (!btn) return;
+    applyTheme(btn.dataset.theme);
+  });
+}
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  storageSet("blacktide-theme", theme);
+  const buttons = document.querySelectorAll("#themeSwitcher .theme-btn");
+  buttons.forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.theme === theme);
+  });
 }
 
 function escapeHtml(s) {
