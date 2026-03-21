@@ -15,6 +15,12 @@ const STORAGE_DATASET_PREFIX = "blacktide-dataset-";
 const STORAGE_CHAPTER_PREFIX = "blacktide-chapter-";
 const STORAGE_VERSION_KEY = "blacktide-content-version";
 const CONTINUITY_CHECKLIST_PATH = "../summaries/continuity-checklist.md";
+const OUTLINE_TAB_KEY = "outline";
+const OUTLINE_SOURCES = [
+  { title: "百万字总纲", path: "../summaries/master-outline.md" },
+  { title: "分卷总纲", path: "../summaries/volume-outline.md" },
+  { title: "前9章重写大纲", path: "../summaries/early-arc-outline-v2.md" }
+];
 
 const state = {
   datasets: new Map(),
@@ -35,7 +41,8 @@ const state = {
   finalizeModalOpen: false,
   continuityChecklistMd: "",
   previewScrollPositions: new Map(),
-  lastPreviewChapterId: ""
+  lastPreviewChapterId: "",
+  outlines: []
 };
 
 const els = {
@@ -80,6 +87,7 @@ async function init() {
   await loadConfigDatasets();
   await loadChapterData();
   await loadContinuityChecklist();
+  await loadOutlines();
   renderTabs();
   bindEvents();
   switchTab(state.activeKey);
@@ -164,6 +172,19 @@ async function loadContinuityChecklist() {
       "- [ ] 已追加章节摘要台账"
     ].join("\n");
   }
+}
+
+async function loadOutlines() {
+  const results = await Promise.allSettled(
+    OUTLINE_SOURCES.map(async (src) => {
+      const res = await fetch(src.path, { cache: "no-store" });
+      if (!res.ok) return null;
+      return { title: src.title, content: await res.text() };
+    })
+  );
+  state.outlines = results
+    .filter((r) => r.status === "fulfilled" && r.value)
+    .map((r) => r.value);
 }
 
 function bindEvents() {
@@ -285,12 +306,26 @@ function renderTabs() {
   chapterBtn.addEventListener("click", () => switchTab(CHAPTER_TAB_KEY));
   els.categoryTabs.appendChild(chapterBtn);
 
+  const outlineBtn = document.createElement("button");
+  outlineBtn.className = "tab-btn";
+  outlineBtn.type = "button";
+  outlineBtn.dataset.key = OUTLINE_TAB_KEY;
+  outlineBtn.textContent = "大纲";
+  outlineBtn.addEventListener("click", () => switchTab(OUTLINE_TAB_KEY));
+  els.categoryTabs.appendChild(outlineBtn);
+
   updateActiveTab();
 }
 
 function switchTab(key) {
   state.activeKey = key;
-  state.mode = key === CHAPTER_TAB_KEY ? "chapters" : "config";
+  if (key === CHAPTER_TAB_KEY) {
+    state.mode = "chapters";
+  } else if (key === OUTLINE_TAB_KEY) {
+    state.mode = "outline";
+  } else {
+    state.mode = "config";
+  }
   if (state.mode !== "chapters") {
     closePreviewModal();
     closeFinalizeModal();
@@ -305,6 +340,12 @@ function switchTab(key) {
       ? "搜索章节标题、摘要、正文..."
       : "搜索名称、摘要、标签、关系...";
   updateActiveTab();
+
+  if (state.mode === "outline") {
+    renderOutlineView();
+    return;
+  }
+
   renderTagOptions();
   syncSelectionWithFilteredItems();
   renderDatasetMeta();
@@ -350,7 +391,75 @@ function searchTarget(item) {
   return JSON.stringify(item).toLowerCase();
 }
 
+function renderOutlineView() {
+  els.datasetTitle.textContent = "故事大纲";
+  els.datasetDesc.textContent = "百万字总纲、分卷结构与世界观设定。";
+  els.datasetCount.textContent = `共 ${state.outlines.length} 份大纲文档`;
+  els.searchInput.placeholder = "搜索大纲内容...";
+  els.tagSelect.innerHTML = '<option value="">全部标签</option>';
+  els.previewSection.classList.add("hidden");
+
+  els.cardsContainer.innerHTML = "";
+  state.outlines.forEach((outline, idx) => {
+    const card = document.createElement("article");
+    card.className = "card";
+    if (idx === 0 && !state.selectedId) {
+      card.classList.add("active");
+      state.selectedId = String(idx);
+    }
+    if (state.selectedId === String(idx)) {
+      card.classList.add("active");
+    }
+    card.addEventListener("click", () => {
+      state.selectedId = String(idx);
+      renderOutlineView();
+    });
+    const title = document.createElement("h3");
+    title.textContent = outline.title;
+    const summary = document.createElement("p");
+    const firstLine = outline.content.split("\n").find((l) => l.trim() && !l.startsWith("#")) || "";
+    summary.textContent = firstLine.trim().slice(0, 80) || "点击查看";
+    card.appendChild(title);
+    card.appendChild(summary);
+
+    const actions = document.createElement("div");
+    actions.className = "card-actions";
+    const readBtn = document.createElement("button");
+    readBtn.type = "button";
+    readBtn.className = "card-action-btn";
+    readBtn.textContent = "全屏阅读";
+    readBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      state.selectedId = String(idx);
+      openPreviewModal(outline.content);
+    });
+    actions.appendChild(readBtn);
+    card.appendChild(actions);
+
+    els.cardsContainer.appendChild(card);
+  });
+
+  const selectedIdx = Number(state.selectedId) || 0;
+  const selected = state.outlines[selectedIdx];
+  if (selected) {
+    els.detailTitle.textContent = selected.title;
+    els.detailPanel.innerHTML = markdownToHtml(selected.content);
+    els.detailPanel.style.maxHeight = "none";
+  } else {
+    els.detailTitle.textContent = "大纲";
+    els.detailPanel.innerHTML = '<p class="muted">暂无大纲文档</p>';
+  }
+
+  els.editorTitle.textContent = "大纲预览";
+  els.editorHint.textContent = "大纲文档为只读模式。如需修改请直接编辑 novel/summaries/ 目录下的 .md 文件。";
+  els.editorTextarea.value = selected ? selected.content : "";
+  els.editorTextarea.disabled = true;
+  els.editorButtons.innerHTML = "";
+  els.rawPanel.classList.add("hidden");
+}
+
 function renderDatasetMeta() {
+  els.detailPanel.style.maxHeight = "";
   if (state.mode === "chapters") {
     const meta = state.chapters.meta || {};
     els.datasetTitle.textContent = meta.displayName || "章节";
