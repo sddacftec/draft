@@ -12,7 +12,14 @@
         <h1>黑潮纪元 · 配置与章节编辑器</h1>
         <p>人物 / 剧情 / 地图 / 怪物 / 技能 / 装备 / 势力 / 时间线 / 章节</p>
       </div>
-      <button id="toggleRawBtn" class="ghost-btn">显示原始 JSON</button>
+      <div style="display:flex;align-items:center;gap:12px;">
+        <div id="themeSwitcher" class="theme-switcher">
+          <button class="theme-btn active" data-theme="dark" type="button">黑夜</button>
+          <button class="theme-btn" data-theme="light" type="button">白天</button>
+          <button class="theme-btn" data-theme="eye-care" type="button">护眼</button>
+        </div>
+        <button id="toggleRawBtn" class="ghost-btn">显示原始 JSON</button>
+      </div>
     </header>
 
     <main class="layout">
