@@ -1383,6 +1383,7 @@ function loadAnnotations() {
 
 function saveAnnotations() {
   storageSet(STORAGE_ANNOTATIONS_KEY, JSON.stringify(state.annotations));
+  syncAnnotationsToServer().catch(() => {});
 }
 
 function bindAnnotationEvents() {
@@ -1580,6 +1581,32 @@ function exportAnnotations() {
     return;
   }
 
+  syncAnnotationsToServer().then((synced) => {
+    if (synced) return;
+    fallbackDownloadAnnotations(data);
+  });
+}
+
+async function syncAnnotationsToServer() {
+  try {
+    const res = await fetch("/api/save-annotations", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ annotations: state.annotations })
+    });
+    if (!res.ok) return false;
+    const result = await res.json();
+    if (result.ok) {
+      alert(`${result.message}\n保存路径：${result.path}`);
+      return true;
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+function fallbackDownloadAnnotations(data) {
   const lines = ["# 阅读评论汇总", "", `> 导出时间：${new Date().toLocaleString("zh-CN")}`, ""];
   const byChapter = new Map();
   data.forEach((ann) => {
