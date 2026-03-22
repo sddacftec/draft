@@ -86,11 +86,27 @@
       <div class="preview-modal-inner">
         <header class="preview-modal-header">
           <h2>章节全屏预览</h2>
-          <button id="closePreviewModalBtn" class="ghost-btn" type="button">
-            关闭
-          </button>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <button id="toggleAnnotationPanelBtn" class="ghost-btn" type="button">评论列表</button>
+            <button id="exportAnnotationsBtn" class="ghost-btn" type="button">导出评论</button>
+            <button id="closePreviewModalBtn" class="ghost-btn" type="button">关闭</button>
+          </div>
         </header>
-        <div id="previewModalContent" class="preview-modal-content"></div>
+        <div class="preview-modal-body">
+          <div id="previewModalContent" class="preview-modal-content"></div>
+          <aside id="annotationPanel" class="annotation-panel hidden">
+            <h3>本章评论</h3>
+            <div id="annotationList" class="annotation-list"></div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div id="annotationPopover" class="annotation-popover hidden">
+      <textarea id="annotationInput" class="annotation-input" placeholder="输入评论..." rows="3"></textarea>
+      <div class="annotation-popover-actions">
+        <button id="saveAnnotationBtn" class="ghost-btn" type="button">保存</button>
+        <button id="cancelAnnotationBtn" class="ghost-btn" type="button">取消</button>
       </div>
     </div>
 

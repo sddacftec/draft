@@ -14,6 +14,7 @@ const CHAPTER_TAB_KEY = "chapters";
 const STORAGE_DATASET_PREFIX = "blacktide-dataset-";
 const STORAGE_CHAPTER_PREFIX = "blacktide-chapter-";
 const STORAGE_VERSION_KEY = "blacktide-content-version";
+const STORAGE_ANNOTATIONS_KEY = "blacktide-annotations";
 const CONTINUITY_CHECKLIST_PATH = "../summaries/continuity-checklist.md";
 const OUTLINE_TAB_KEY = "outline";
 const OUTLINE_SOURCES = [
@@ -42,7 +43,9 @@ const state = {
   continuityChecklistMd: "",
   previewScrollPositions: new Map(),
   lastPreviewChapterId: "",
-  outlines: []
+  outlines: [],
+  annotations: [],
+  pendingAnnotation: null
 };
 
 const els = {
@@ -72,7 +75,15 @@ const els = {
   editorTextarea: document.getElementById("editorTextarea"),
   editorButtons: document.getElementById("editorButtons"),
   rawPanel: document.getElementById("rawPanel"),
-  toggleRawBtn: document.getElementById("toggleRawBtn")
+  toggleRawBtn: document.getElementById("toggleRawBtn"),
+  annotationPanel: document.getElementById("annotationPanel"),
+  annotationList: document.getElementById("annotationList"),
+  toggleAnnotationPanelBtn: document.getElementById("toggleAnnotationPanelBtn"),
+  exportAnnotationsBtn: document.getElementById("exportAnnotationsBtn"),
+  annotationPopover: document.getElementById("annotationPopover"),
+  annotationInput: document.getElementById("annotationInput"),
+  saveAnnotationBtn: document.getElementById("saveAnnotationBtn"),
+  cancelAnnotationBtn: document.getElementById("cancelAnnotationBtn")
 };
 
 initTheme();
@@ -88,8 +99,10 @@ async function init() {
   await loadChapterData();
   await loadContinuityChecklist();
   await loadOutlines();
+  loadAnnotations();
   renderTabs();
   bindEvents();
+  bindAnnotationEvents();
   switchTab(state.activeKey);
 }
 
@@ -969,6 +982,9 @@ function openPreviewModal(markdownText) {
   } else {
     els.previewModalContent.scrollTop = 0;
   }
+
+  applyAnnotationHighlights();
+  renderAnnotationList();
 }
 
 function closePreviewModal() {
@@ -978,8 +994,10 @@ function closePreviewModal() {
       els.previewModalContent.scrollTop
     );
   }
+  hideAnnotationPopover();
   state.previewModalOpen = false;
   els.previewModal.classList.add("hidden");
+  els.annotationPanel.classList.add("hidden");
   if (!state.finalizeModalOpen) {
     document.body.classList.remove("modal-open");
   }
@@ -1352,6 +1370,237 @@ function clearAllStoredDrafts(meta) {
   } catch {
     // ignore storage errors
   }
+}
+
+function loadAnnotations() {
+  try {
+    const raw = storageGet(STORAGE_ANNOTATIONS_KEY);
+    state.annotations = raw ? JSON.parse(raw) : [];
+  } catch {
+    state.annotations = [];
+  }
+}
+
+function saveAnnotations() {
+  storageSet(STORAGE_ANNOTATIONS_KEY, JSON.stringify(state.annotations));
+}
+
+function bindAnnotationEvents() {
+  els.previewModalContent.addEventListener("mouseup", onTextSelected);
+  els.saveAnnotationBtn.addEventListener("click", commitAnnotation);
+  els.cancelAnnotationBtn.addEventListener("click", hideAnnotationPopover);
+  els.toggleAnnotationPanelBtn.addEventListener("click", () => {
+    els.annotationPanel.classList.toggle("hidden");
+  });
+  els.exportAnnotationsBtn.addEventListener("click", exportAnnotations);
+}
+
+function onTextSelected(e) {
+  const sel = window.getSelection();
+  if (!sel || sel.isCollapsed || !sel.toString().trim()) return;
+  if (!state.previewModalOpen || !state.lastPreviewChapterId) return;
+  if (e.target.closest(".annotation-popover")) return;
+
+  const selectedText = sel.toString().trim();
+  if (selectedText.length < 2) return;
+
+  const range = sel.getRangeAt(0);
+  const textBefore = getTextContentBefore(els.previewModalContent, range.startContainer, range.startOffset);
+
+  state.pendingAnnotation = {
+    chapterId: state.lastPreviewChapterId,
+    selectedText,
+    charOffset: textBefore.length,
+    range: range.cloneRange()
+  };
+
+  const rect = range.getBoundingClientRect();
+  const popover = els.annotationPopover;
+  popover.classList.remove("hidden");
+  const left = Math.min(rect.left, window.innerWidth - 320);
+  const top = rect.bottom + 8;
+  popover.style.left = Math.max(8, left) + "px";
+  popover.style.top = Math.min(top, window.innerHeight - 160) + "px";
+  els.annotationInput.value = "";
+  els.annotationInput.focus();
+}
+
+function getTextContentBefore(root, node, offset) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  let text = "";
+  while (walker.nextNode()) {
+    if (walker.currentNode === node) {
+      text += walker.currentNode.textContent.slice(0, offset);
+      break;
+    }
+    text += walker.currentNode.textContent;
+  }
+  return text;
+}
+
+function commitAnnotation() {
+  const p = state.pendingAnnotation;
+  if (!p) return;
+  const comment = els.annotationInput.value.trim();
+  if (!comment) {
+    els.annotationInput.focus();
+    return;
+  }
+
+  const chapterItem = state.chapters.items.find((it) => it.id === p.chapterId);
+  const annotation = {
+    id: "ann_" + Date.now(),
+    chapterId: p.chapterId,
+    chapterTitle: chapterItem ? chapterItem.title : p.chapterId,
+    selectedText: p.selectedText.slice(0, 200),
+    charOffset: p.charOffset,
+    comment,
+    createdAt: new Date().toISOString()
+  };
+  state.annotations.push(annotation);
+  saveAnnotations();
+  hideAnnotationPopover();
+  window.getSelection().removeAllRanges();
+  applyAnnotationHighlights();
+  renderAnnotationList();
+}
+
+function hideAnnotationPopover() {
+  els.annotationPopover.classList.add("hidden");
+  state.pendingAnnotation = null;
+}
+
+function deleteAnnotation(annId) {
+  state.annotations = state.annotations.filter((a) => a.id !== annId);
+  saveAnnotations();
+  applyAnnotationHighlights();
+  renderAnnotationList();
+}
+
+function applyAnnotationHighlights() {
+  if (!state.previewModalOpen || !state.lastPreviewChapterId) return;
+  const chapterId = state.lastPreviewChapterId;
+  const chapterAnns = state.annotations.filter((a) => a.chapterId === chapterId);
+
+  const content = els.previewModalContent;
+  const item = state.chapters.items.find((it) => it.id === chapterId);
+  if (!item) return;
+  const md = getChapterContent(chapterId);
+  let html = markdownToHtml(md);
+
+  chapterAnns
+    .sort((a, b) => b.charOffset - a.charOffset)
+    .forEach((ann) => {
+      const escaped = escapeHtml(ann.selectedText);
+      const idx = html.indexOf(escaped);
+      if (idx >= 0) {
+        html =
+          html.slice(0, idx) +
+          `<span class="annotation-highlight" data-ann-id="${ann.id}" title="${escapeHtml(ann.comment)}">${escaped}</span>` +
+          html.slice(idx + escaped.length);
+      }
+    });
+
+  content.innerHTML = html;
+
+  content.querySelectorAll(".annotation-highlight").forEach((el) => {
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+      const id = el.dataset.annId;
+      const listItem = document.querySelector(`.annotation-item[data-ann-id="${id}"]`);
+      if (listItem) {
+        els.annotationPanel.classList.remove("hidden");
+        listItem.scrollIntoView({ behavior: "smooth", block: "center" });
+        listItem.style.borderColor = "var(--primary)";
+        setTimeout(() => { listItem.style.borderColor = ""; }, 1500);
+      }
+    });
+  });
+}
+
+function renderAnnotationList() {
+  const chapterId = state.lastPreviewChapterId;
+  const chapterAnns = state.annotations.filter((a) => a.chapterId === chapterId);
+  els.annotationList.innerHTML = "";
+
+  if (!chapterAnns.length) {
+    els.annotationList.innerHTML = '<p class="muted" style="font-size:13px;">暂无评论。在正文中划选文字即可添加。</p>';
+    return;
+  }
+
+  chapterAnns.forEach((ann) => {
+    const item = document.createElement("div");
+    item.className = "annotation-item";
+    item.dataset.annId = ann.id;
+
+    const textDiv = document.createElement("div");
+    textDiv.className = "annotation-item-text";
+    textDiv.textContent = ann.selectedText.length > 60 ? ann.selectedText.slice(0, 60) + "…" : ann.selectedText;
+
+    const commentDiv = document.createElement("div");
+    commentDiv.className = "annotation-item-comment";
+    commentDiv.textContent = ann.comment;
+
+    const metaDiv = document.createElement("div");
+    metaDiv.className = "annotation-item-meta";
+    metaDiv.textContent = new Date(ann.createdAt).toLocaleString("zh-CN");
+
+    const actionsDiv = document.createElement("div");
+    actionsDiv.className = "annotation-item-actions";
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "删除";
+    delBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      deleteAnnotation(ann.id);
+    });
+    actionsDiv.appendChild(delBtn);
+
+    item.appendChild(textDiv);
+    item.appendChild(commentDiv);
+    item.appendChild(metaDiv);
+    item.appendChild(actionsDiv);
+
+    item.addEventListener("click", () => {
+      const hl = els.previewModalContent.querySelector(`[data-ann-id="${ann.id}"]`);
+      if (hl) {
+        hl.scrollIntoView({ behavior: "smooth", block: "center" });
+        hl.style.background = "color-mix(in srgb, var(--primary) 50%, transparent)";
+        setTimeout(() => { hl.style.background = ""; }, 1500);
+      }
+    });
+
+    els.annotationList.appendChild(item);
+  });
+}
+
+function exportAnnotations() {
+  const data = state.annotations.length ? state.annotations : [];
+  if (!data.length) {
+    alert("暂无评论可导出。");
+    return;
+  }
+
+  const lines = ["# 阅读评论汇总", "", `> 导出时间：${new Date().toLocaleString("zh-CN")}`, ""];
+  const byChapter = new Map();
+  data.forEach((ann) => {
+    if (!byChapter.has(ann.chapterId)) byChapter.set(ann.chapterId, []);
+    byChapter.get(ann.chapterId).push(ann);
+  });
+
+  byChapter.forEach((anns, chapterId) => {
+    const title = anns[0]?.chapterTitle || chapterId;
+    lines.push(`## ${title}`, "");
+    anns.forEach((ann, i) => {
+      lines.push(`### 评论 ${i + 1}`);
+      lines.push(`- **划线文字**：「${ann.selectedText}」`);
+      lines.push(`- **评论**：${ann.comment}`);
+      lines.push(`- **位置偏移**：${ann.charOffset}`);
+      lines.push(`- **时间**：${new Date(ann.createdAt).toLocaleString("zh-CN")}`);
+      lines.push("");
+    });
+  });
+
+  downloadText("annotations-export.md", lines.join("\n"), "text/markdown;charset=utf-8");
 }
 
 function initTheme() {
