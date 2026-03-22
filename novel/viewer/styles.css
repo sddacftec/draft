@@ -423,11 +423,134 @@ select {
   font-size: 18px;
 }
 
+.preview-modal-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
 .preview-modal-content {
   flex: 1;
   overflow: auto;
   padding: 18px 22px;
   line-height: 1.75;
+}
+
+.annotation-panel {
+  width: 320px;
+  border-left: 1px solid var(--line);
+  background: var(--panel);
+  overflow: auto;
+  padding: 12px;
+  flex-shrink: 0;
+}
+
+.annotation-panel h3 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+
+.annotation-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.annotation-item {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 10px;
+  background: var(--panel-deep);
+  font-size: 13px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.annotation-item:hover {
+  border-color: var(--primary-2);
+}
+
+.annotation-item-text {
+  color: var(--primary);
+  font-size: 12px;
+  margin-bottom: 6px;
+  line-height: 1.4;
+  padding: 4px 6px;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+  border-radius: 4px;
+  word-break: break-all;
+}
+
+.annotation-item-comment {
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+
+.annotation-item-meta {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.annotation-item-actions {
+  margin-top: 6px;
+  display: flex;
+  gap: 6px;
+}
+
+.annotation-item-actions button {
+  border: 1px solid var(--line);
+  background: var(--btn-bg);
+  color: var(--muted);
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+.annotation-item-actions button:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+.annotation-popover {
+  position: fixed;
+  z-index: 100;
+  width: 300px;
+  border: 1px solid var(--primary-2);
+  border-radius: 10px;
+  background: var(--panel);
+  padding: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+}
+
+.annotation-input {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--panel-deep);
+  color: var(--text);
+  padding: 8px;
+  font: inherit;
+  font-size: 13px;
+  resize: vertical;
+}
+
+.annotation-popover-actions {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.annotation-highlight {
+  background: color-mix(in srgb, var(--primary) 25%, transparent);
+  border-bottom: 2px solid var(--primary);
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.annotation-highlight:hover {
+  background: color-mix(in srgb, var(--primary) 40%, transparent);
 }
 
 .preview-modal-content h1,
