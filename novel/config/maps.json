@@ -9,55 +9,39 @@
       "name": "浮木寨",
       "zoneType": "海上聚落",
       "threatLevel": "高",
-      "controlFaction": "巡缉体系 + 黑市势力",
-      "tags": [
-        "新手区",
-        "秩序崩坏",
-        "资源短缺"
-      ],
-      "summary": "由七艘废弃巨船骨架与浮桥拼接而成的海上聚居地，平日勉强运转，黑潮来临时迅速失控。",
-      "resources": [
-        "淡水井",
-        "废旧动力件",
-        "基础医疗物资"
-      ],
-      "hazards": [
-        "盐鳞鼠污染",
-        "强征与内斗",
-        "外环防线脆弱"
-      ],
-      "connectedTo": [
-        "九号浮桩",
-        "死人码头"
-      ],
+      "controlFaction": "中塔寨务委员会 + 巡缉体系 + 黑市势力",
+      "tags": ["起始地", "三层结构", "秩序崩坏"],
+      "summary": "黑潮纪元137年仍存的大型海上聚居地。由七艘报废巨船骨架焊接而成，分外环（底层劳工）、中环（技术与交易）、中塔（权力中心）三层。外环条件恶劣，资源被中塔垄断。",
+      "resources": ["淡水井（被污染）", "废旧动力件", "基础医疗物资（紧缺）", "深潜打捞收益"],
+      "hazards": ["盐鳞鼠污染", "强征与内斗", "外环防线脆弱", "邱彪的黑市势力"],
+      "connectedTo": ["九号浮桩", "白骨滩"],
       "firstAppearance": "chapter-01"
     },
     {
-      "id": "map_outer_ring_dock",
-      "name": "外环吊臂平台",
-      "zoneType": "工业残骸点",
-      "threatLevel": "极高（黑潮期）",
+      "id": "map_white_bone_shoal",
+      "name": "白骨滩",
+      "zoneType": "沉船密集区（深潜区）",
+      "threatLevel": "中高",
       "controlFaction": "无",
-      "tags": [
-        "救援点",
-        "高风浪",
-        "潮兽接触区"
-      ],
-      "summary": "黑潮夜中大量工人被困区域，救援需要高速切浪与精确操船。",
-      "resources": [
-        "吊装设备",
-        "工业金属件"
-      ],
-      "hazards": [
-        "链桥断裂",
-        "潮兽近岸冲击",
-        "裂翼鳐俯冲"
-      ],
-      "connectedTo": [
-        "浮木寨",
-        "九号浮桩"
-      ],
+      "tags": ["深潜区", "遗物产出", "地热异常"],
+      "summary": "浮木寨西南约一海里的沉船坟场。旧时代残骸堆叠，白色盐壳覆盖船骨。深潜手在此打捞旧时代零件。地热裂隙在黑潮前有异常活动。",
+      "resources": ["旧时代零件与模块", "遗物概率", "微型陀螺仪等精密件"],
+      "hazards": ["封闭舱体有毒气", "结构不稳定", "地热暖流突变"],
+      "connectedTo": ["浮木寨"],
       "firstAppearance": "chapter-04"
+    },
+    {
+      "id": "map_qiu_biao_warehouse",
+      "name": "邱彪仓库区",
+      "zoneType": "私人码头与仓储",
+      "threatLevel": "中（有人看守）",
+      "controlFaction": "邱彪势力",
+      "tags": ["敌方据点", "物资囤积", "夺船目标"],
+      "summary": "外环西北角铁皮围栏圈出的私人区域，含六个泊位与燃料桶区。邱彪在此囤积燃料、零件等物资，灰雀号被关押在三号泊位。",
+      "resources": ["燃料桶", "各类零件", "灰雀号"],
+      "hazards": ["看守人员", "触发警报风险"],
+      "connectedTo": ["浮木寨"],
+      "firstAppearance": "chapter-07"
     },
     {
       "id": "map_no9_pylon",
@@ -65,108 +49,116 @@
       "zoneType": "背风避难点",
       "threatLevel": "中",
       "controlFaction": "临时由灰雀船团控制",
-      "tags": [
-        "中转站",
-        "修整点",
-        "剧情节点"
-      ],
-      "summary": "废弃钻井平台残骸，具备短时挡浪能力，是黑潮后存活者集结点。",
-      "resources": [
-        "钢架掩体",
-        "临时停泊位"
-      ],
-      "hazards": [
-        "补给不足",
-        "无法长期防守",
-        "次级潮兽游荡"
-      ],
-      "connectedTo": [
-        "浮木寨",
-        "死人码头"
-      ],
-      "firstAppearance": "chapter-04"
+      "tags": ["中转站", "修整点", "阶段终点"],
+      "summary": "废弃钻井平台残骸，三面钢桩具备短时挡浪能力。上次黑潮曾有人在此幸存。是黑潮夜突围的目标避护点。",
+      "resources": ["钢架掩体", "临时停泊位"],
+      "hazards": ["补给不足", "无法长期防守", "引擎可能无法再启动"],
+      "connectedTo": ["浮木寨", "死人码头（计划目标）"],
+      "firstAppearance": "chapter-09"
     },
     {
-      "id": "map_dead_dockyard",
-      "name": "死人码头",
-      "zoneType": "沉船坟地",
+      "id": "map_south_platform_cluster_m9",
+      "name": "南方平台群（第九采掘站）",
+      "zoneType": "海上平台群",
+      "threatLevel": "中",
+      "controlFaction": "临时由灰雀船团使用（计划）",
+      "tags": ["据点", "多平台互联", "卷一后期"],
+      "summary": "四座相互连通的采掘平台残骸组成的聚居点，船团在此整顿、分配岗位并处理内部路线分歧。平台之间有栈桥与缆索通道相连。",
+      "resources": ["淡水收集面", "简易工坊位", "分散仓储点"],
+      "hazards": ["结构老化", "分区协调成本", "补给线拉长"],
+      "connectedTo": ["九号浮桩", "骨海", "雾墓海域（边缘）"],
+      "firstAppearance": "chapter-19"
+    },
+    {
+      "id": "map_federation_supply_point_7",
+      "name": "联邦7号补给点",
+      "zoneType": "人工礁补给站",
+      "threatLevel": "中",
+      "controlFaction": "联邦体系（封存）",
+      "tags": ["补给", "密封舱", "计划剧情点"],
+      "summary": "小型人工礁结构上设置的封存补给点，内部存有未开封的标准物资与备件，需合法船契或破解手段获取。",
+      "resources": ["密封燃料与淡水剂", "标准备件箱", "可能的船契相关组件"],
+      "hazards": ["准入权限", "触发联邦警戒的可能", "结构淹水区"],
+      "connectedTo": ["骨海", "铁灰海"],
+      "firstAppearance": "chapter-29"
+    },
+    {
+      "id": "map_bone_sea",
+      "name": "骨海",
+      "zoneType": "广域海域（沉船密集区）",
+      "threatLevel": "中-高",
+      "controlFaction": "多方争夺 / 无单一控制",
+      "tags": ["骨海", "沉船坟场", "资源富集"],
+      "summary": "旧时代航运密集区，沉船残骸层层叠叠，打捞价值极高但毒气、坍塌与伏击风险并存，是各势力争夺补给与遗物的焦点海域。",
+      "resources": ["大量旧时代零件与舱段", "遗物概率", "可拆解动力件"],
+      "hazards": ["封闭舱毒气", "结构坍塌", "势力冲突与埋伏"],
+      "connectedTo": ["死人码头", "联邦退役船坞", "聚落近海"],
+      "firstAppearance": "总纲·地理体系"
+    },
+    {
+      "id": "map_fog_tomb_sea",
+      "name": "雾墓海域",
+      "zoneType": "永久盐雾禁航区",
       "threatLevel": "极高",
-      "controlFaction": "多方争夺",
-      "tags": [
-        "副本区",
-        "高收益",
-        "高死亡"
-      ],
-      "summary": "旧时代拆船场沉没后的残骸群，埋藏大量关键模块，也是伏击高发地。",
-      "resources": [
-        "船契组件",
-        "联邦退役装备",
-        "高价值动力件"
-      ],
-      "hazards": [
-        "磁乱区失航",
-        "盐雾遮蔽",
-        "敌对势力埋伏"
-      ],
-      "connectedTo": [
-        "九号浮桩",
-        "雾墓区"
-      ],
-      "firstAppearance": "chapter-05"
+      "controlFaction": "无",
+      "tags": ["雾墓", "认知污染", "禁航"],
+      "summary": "常年盐雾笼罩的禁航海域，声潮会模仿熟人声音诱人脱离安全位置。海底疑似存在旧时代建筑群。下属地点包括回声峡、倒悬灯塔、雾墓遗城。",
+      "resources": ["极高风险遗物线索", "旧时代建筑残段"],
+      "hazards": ["声潮认知污染", "听潮者等异变体", "迷航与失散"],
+      "connectedTo": ["回声峡", "倒悬灯塔", "雾墓遗城", "骨海"],
+      "firstAppearance": "总纲·地理体系"
     },
     {
-      "id": "map_fog_tomb_zone",
-      "name": "雾墓区",
-      "zoneType": "诡秘污染海域",
+      "id": "map_iron_gray_sea",
+      "name": "铁灰海",
+      "zoneType": "联邦高管控海域",
+      "threatLevel": "中（高管控）",
+      "controlFaction": "联邦导航体系",
+      "tags": ["联邦核心", "工业化", "通行证"],
+      "summary": "联邦导航体系核心控制区，造船厂、炼油平台与导航塔网络密集，军事化程度高，外来船只须持通行证。下属地点包括北港基地、审判舰队母港、联邦档案塔。",
+      "resources": ["正规船坞与补给", "导航塔网络", "档案与鉴定服务（受限）"],
+      "hazards": ["盘查与扣船", "审判舰队武力威慑", "非法遗物持有者高风险"],
+      "connectedTo": ["北港基地", "审判舰队母港", "联邦档案塔", "骨海"],
+      "firstAppearance": "总纲·地理体系"
+    },
+    {
+      "id": "map_black_sail_sea",
+      "name": "黑帆海域",
+      "zoneType": "自由舰盟势力海域",
+      "threatLevel": "高",
+      "controlFaction": "自由舰盟（松散）",
+      "tags": ["黑帆", "走私", "弱法秩序"],
+      "summary": "自由舰盟主要势力范围，海匪、走私与非法遗物交易集中，规则靠火力与声望维系。下属地点包括黑帆港、自由市场浮岛。",
+      "resources": ["黑市渠道", "来路不明遗物", "雇佣与情报"],
+      "hazards": ["火并", "黑吃黑", "剖眼队等极端派系"],
+      "connectedTo": ["黑帆港", "自由市场浮岛", "骨海", "铁灰海（摩擦带）"],
+      "firstAppearance": "总纲·地理体系"
+    },
+    {
+      "id": "map_tide_rift_zone",
+      "name": "裂潮带",
+      "zoneType": "灾厄级异常海域",
       "threatLevel": "灾厄级",
-      "controlFaction": "未知",
-      "tags": [
-        "诡秘探索",
-        "认知污染",
-        "剧情主入口"
-      ],
-      "summary": "长期被盐雾覆盖的禁航区，存在声潮幻听与地形不稳定现象。",
-      "resources": [
-        "导航员线索",
-        "高阶遗物概率",
-        "未知生物样本"
-      ],
-      "hazards": [
-        "声潮污染",
-        "回声峡旋涡塌陷",
-        "巨型潜伏体追踪"
-      ],
-      "connectedTo": [
-        "死人码头",
-        "倒悬灯塔"
-      ],
-      "firstAppearance": "chapter-06"
+      "controlFaction": "无",
+      "tags": ["黑潮发源地", "盐源", "禁区"],
+      "summary": "黑潮发源地，海面永不安宁，天空常年裂云，潮兽密度极高，海底存在盐源活跃泄露。除极少数疯子与探险队外几乎无人深入。下属地点包括第一裂隙、盐源之眼。",
+      "resources": ["盐源直接样本（理论）", "旧时代设施入口线索"],
+      "hazards": ["超级黑潮与潮兽潮", "盐化急剧上升", "结构级海洋灾害"],
+      "connectedTo": ["第一裂隙", "盐源之眼", "雾墓海域", "沉陆海台"],
+      "firstAppearance": "总纲·地理体系"
     },
     {
-      "id": "map_upside_down_lighthouse",
-      "name": "倒悬灯塔",
-      "zoneType": "异常遗迹点",
-      "threatLevel": "未知（推定极高）",
-      "controlFaction": "未知",
-      "tags": [
-        "关键线索",
-        "高价值目标",
-        "未知规则"
-      ],
-      "summary": "断裂后倒挂在半空的灯塔遗迹，下方漂浮带有联邦标记的救生舱。",
-      "resources": [
-        "联邦导航员",
-        "旧时代日志可能性"
-      ],
-      "hazards": [
-        "未知监听型生物",
-        "近海巨影活动",
-        "高认知污染概率"
-      ],
-      "connectedTo": [
-        "雾墓区"
-      ],
-      "firstAppearance": "chapter-06"
+      "id": "map_sunken_continent_shelf",
+      "name": "沉陆海台",
+      "zoneType": "浅水高台（大陆沉没遗迹）",
+      "threatLevel": "未知",
+      "controlFaction": "无",
+      "tags": ["沉陆", "终局舞台", "海天之门"],
+      "summary": "旧时代大陆沉没形成的浅水高台，水下可见保存较好的城市废墟，传说海天改造计划主设施位于此。尚无完整探索报告传回。下属地点包括沉没之都、海天之门。",
+      "resources": ["完整旧时代城市结构", "计划核心设施线索"],
+      "hazards": ["未知生态与机关", "极高盐化与遗迹陷阱", "信息黑洞"],
+      "connectedTo": ["沉没之都", "海天之门", "裂潮带"],
+      "firstAppearance": "总纲·地理体系"
     }
   ]
 }
